@@ -4,8 +4,11 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Providers from "./AuthProviders/Providers.jsx";
+import "sweetalert2/dist/sweetalert2.css";
 import Home from "./Pages/Home/Home.jsx";
+import Login from "./Pages/User/Login.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
     ],
   },
 ]);
@@ -24,7 +31,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Providers>
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </Providers>
   </React.StrictMode>
 );
