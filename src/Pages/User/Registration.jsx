@@ -40,17 +40,6 @@ const Registration = () => {
       return;
     }
 
-    const capitalLetter = /(?=.*[A-Z])/;
-    if (!capitalLetter.test(password)) {
-      Swal.fire({
-        title: "Password should contain at least one capital letter",
-        text: "Do you want to continue?",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
     const specialCharacter = /(?=.*[!@#$&*])/;
     if (!specialCharacter.test(password)) {
       Swal.fire({

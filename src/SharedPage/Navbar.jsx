@@ -78,32 +78,31 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {user ? (
-        <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-full rounded-full relative">
-                <span className="text-white text-xs">{user.displayName}</span>
-                <img src={user.photoURL} alt="User" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li onClick={logOut}>
-                <a>Logout</a>
-              </li>
-            </ul>
+      <div className="navbar-end">
+        <div className="pr-4 relative ">
+          {user && (
+            <div className="flex md:gap-3 items-center">
+              <img
+                className=" w-12 rounded-full"
+                src={user.photoURL}
+                alt="Image"
+              />
+              <p>{user.displayName}</p>
+            </div>
+          )}
+        </div>
+        {user ? (
+          <div>
+            <button className="btn btn-success text-white" onClick={logOut}>
+              Logout
+            </button>
           </div>
-        </div>
-      ) : (
-        <div className="navbar-end">
+        ) : (
           <Link to="/login">
-            <button className="btn btn-success text-white">Log In</button>
+            <button className="btn btn-success text-white">Login</button>
           </Link>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
