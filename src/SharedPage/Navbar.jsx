@@ -51,7 +51,7 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl text-green-500">
+        <a className="btn btn-ghost normal-case text-xl text-green-500 font-bold">
           Uniqueness
         </a>
       </div>
