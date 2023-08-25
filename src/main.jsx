@@ -7,6 +7,7 @@ import Providers from "./AuthProviders/Providers.jsx";
 import "sweetalert2/dist/sweetalert2.css";
 import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/User/Login.jsx";
+import Registration from "./Pages/User/Registration.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Registration></Registration>,
       },
     ],
   },
