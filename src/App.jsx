@@ -1,7 +1,9 @@
+import Navbar from "./SharedPage/Navbar";
+
 function App() {
   return (
     <div>
-      <div>React Router</div>
+      <Navbar></Navbar>
     </div>
   );
 }
