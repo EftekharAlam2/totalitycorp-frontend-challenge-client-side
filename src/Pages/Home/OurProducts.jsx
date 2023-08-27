@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -147,19 +146,15 @@ const OurProducts = () => {
                       <p className="font-bold">{products.rating}</p>
                     </div>
                   </div>
-                  {/* <Link to={`/productsdetails/${chef.id}`}> */}
                   <button
                     onClick={() => {
                       handleClick(products);
-                      // notify();
-                      // handleClick(value);
                     }}
                     className="bg-blue-500 text-white rounded-full py-2 px-4 hover:bg-blue-700"
                   >
                     Add to Cart
                   </button>
                   <ToastContainer />
-                  {/* </Link> */}
                 </div>
               </div>
             ))}
