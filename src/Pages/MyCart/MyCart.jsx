@@ -1,12 +1,54 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../AuthProviders/Providers";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
   const { user } = useContext(Context);
 
   const [productData, setproductData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleIncrease = (product) => {
+    const userName = user?.displayName;
+    const email = user?.email;
+    const productName = product.productName;
+    const category = product.category;
+    const price = product.price;
+    const rating = product.rating;
+    const image = product.image;
+
+    const newProduct = {
+      userName,
+      email,
+      productName,
+      category,
+      price,
+      rating,
+      image,
+    };
+
+    fetch("http://localhost:5000/addproduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Product Increase Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    setRefresh(true);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/product/${user?.email}`, {
@@ -17,7 +59,7 @@ const MyCart = () => {
         setproductData(data);
         setLoading(false);
       });
-  }, []);
+  }, [user?.email, refresh]);
 
   return (
     <div className="mb-10">
@@ -31,7 +73,7 @@ const MyCart = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
+          <div className="mx-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
             {productData.map((products) => (
               <div
                 key={products._id}
@@ -60,8 +102,7 @@ const MyCart = () => {
                   <div className="flex gap-3">
                     <button
                       onClick={() => {
-                        // notify();
-                        // handleClick(value);
+                        handleIncrease(products);
                       }}
                       className="bg-blue-500 text-white rounded-full py-2 px-4 hover:bg-blue-700"
                     >
