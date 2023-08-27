@@ -10,6 +10,7 @@ import Login from "./Pages/User/Login.jsx";
 import Registration from "./Pages/User/Registration.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 import MyCart from "./Pages/MyCart/MyCart.jsx";
+import Checkout from "./Pages/MyCart/Checkout.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout></Checkout>,
       },
     ],
   },

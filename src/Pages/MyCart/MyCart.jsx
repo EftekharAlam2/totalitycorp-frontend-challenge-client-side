@@ -2,12 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../../AuthProviders/Providers";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const { user } = useContext(Context);
 
   const [productData, setproductData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const totalPrice = productData.reduce(
+    (total, product) => total + product.price,
+    0
+  );
 
   const handleIncrease = (product) => {
     const userName = user?.displayName;
@@ -81,8 +88,22 @@ const MyCart = () => {
 
   return (
     <div className="mb-10">
-      <div className="text-center py-8 mt-5">
-        <h2 className="font-bold text-4xl mb-4 our-chefs-heading">My Cart</h2>
+      <Helmet>
+        <title>Uniqueness | My Cart</title>
+      </Helmet>
+      <div className="py-8 mt-5 mx-5">
+        <h2 className="font-bold text-3xl mb-4 ">Added poducts</h2>
+        <h3 className="font-semibold text-2xl mb-4 ">
+          Items: {productData.length}
+        </h3>
+        <h3 className="font-semibold text-2xl mb-4 ">
+          Total Cost: ${totalPrice.toFixed(2)}
+        </h3>
+        <Link to="/checkout">
+          <button className="bg-blue-300 text-xl text-white rounded-lg py-4 px-6 hover:bg-blue-700">
+            Checkout Process
+          </button>
+        </Link>
       </div>
 
       {loading ? (
