@@ -1,13 +1,63 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Context } from "../../AuthProviders/Providers";
+import Swal from "sweetalert2";
 
 const OurProducts = () => {
+  const { user } = useContext(Context);
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortCategory, setSortCategory] = useState("Electronics");
   const [sortPrice, setSortPrice] = useState("1000");
   const [sortRating, setSortRating] = useState("5.0");
+
+  const handleClick = (product) => {
+    if (user) {
+      const userName = user?.displayName;
+      const email = user?.email;
+      const productName = product.name;
+      const category = product.category;
+      const price = product.price;
+      const rating = product.rating;
+      const image = product.image_url;
+
+      const newProduct = {
+        userName,
+        email,
+        productName,
+        category,
+        price,
+        rating,
+        image,
+      };
+
+      fetch("http://localhost:5000/addproduct", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            toast("Your Cart has been added");
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "Please Login to Add your Cart",
+        text: "Do you want to continue?",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+  };
 
   useEffect(() => {
     fetch(
@@ -98,9 +148,17 @@ const OurProducts = () => {
                     </div>
                   </div>
                   {/* <Link to={`/productsdetails/${chef.id}`}> */}
-                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">
-                    View Profile
+                  <button
+                    onClick={() => {
+                      handleClick(products);
+                      // notify();
+                      // handleClick(value);
+                    }}
+                    className="bg-blue-500 text-white rounded-full py-2 px-4 hover:bg-blue-700"
+                  >
+                    Add to Cart
                   </button>
+                  <ToastContainer />
                   {/* </Link> */}
                 </div>
               </div>
