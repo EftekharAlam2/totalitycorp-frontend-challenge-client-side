@@ -81,8 +81,7 @@ const OurProducts = () => {
               >
                 <LazyLoadImage
                   className="w-full h-64 object-cover object-center"
-                  src="https://i.ibb.co/mBSGpX5/dress.jpg"
-                  alt="Cothing"
+                  src={products.image_url}
                 />
 
                 <div className="p-4">
