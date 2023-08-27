@@ -5,6 +5,9 @@ import Testimonials from "./Testimonials";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Uniqueness | SignIn</title>
+      </Helmet>
       <Banner></Banner>
       <OurProducts></OurProducts>
       <Testimonials></Testimonials>

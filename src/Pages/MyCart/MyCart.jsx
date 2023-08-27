@@ -8,7 +8,6 @@ const MyCart = () => {
 
   const [productData, setproductData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(false);
 
   const handleIncrease = (product) => {
     const userName = user?.displayName;
@@ -45,9 +44,28 @@ const MyCart = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          setproductData((prevProductData) => [...prevProductData, newProduct]);
         }
       });
-    setRefresh(true);
+  };
+
+  const handleRemove = (id) => {
+    const proceed = confirm("Are You sure you want to delete");
+    if (proceed) {
+      fetch(`http://localhost:5000/product/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("Deleted successful");
+            const remaining = productData.filter(
+              (products) => products._id !== id
+            );
+            setproductData(remaining);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -59,7 +77,7 @@ const MyCart = () => {
         setproductData(data);
         setLoading(false);
       });
-  }, [user?.email, refresh]);
+  }, [user?.email]);
 
   return (
     <div className="mb-10">
@@ -109,10 +127,7 @@ const MyCart = () => {
                       Increase
                     </button>
                     <button
-                      onClick={() => {
-                        // notify();
-                        // handleClick(value);
-                      }}
+                      onClick={() => handleRemove(products._id)}
                       className="bg-red-500 text-white rounded-full py-2 px-4 hover:bg-red-700"
                     >
                       Remove
