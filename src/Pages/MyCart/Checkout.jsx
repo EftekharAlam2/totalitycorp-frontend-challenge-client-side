@@ -91,7 +91,11 @@ const Checkout = () => {
 
   return (
     <div className="mx-5 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10 justify-center mt-5 mb-5">
-      <div className="overflow-x-auto">
+      <div
+        data-aos="zoom-in-up"
+        data-aos-duration="3000"
+        className="overflow-x-auto"
+      >
         <h3 className="font-semibold text-2xl mb-4 ">
           Total Cost: ${totalPrice.toFixed(2)}
         </h3>
@@ -126,6 +130,8 @@ const Checkout = () => {
         </table>
       </div>
       <form
+        data-aos="zoom-in"
+        data-aos-duration="3000"
         onSubmit={addInformation}
         className="grid grid-cols-1 md:grid-cols-2 gap-3"
       >
