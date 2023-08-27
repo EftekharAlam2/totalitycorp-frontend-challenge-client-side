@@ -12,9 +12,12 @@ const Checkout = () => {
   );
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${user?.email}`, {
-      method: "GET",
-    })
+    fetch(
+      `https://totalitycorp-frontend-challenge-server-side.vercel.app/product/${user?.email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setproductData(data);
@@ -22,9 +25,12 @@ const Checkout = () => {
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://totalitycorp-frontend-challenge-server-side.vercel.app/product/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
@@ -68,13 +74,16 @@ const Checkout = () => {
       productData,
     };
 
-    fetch("http://localhost:5000/order", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(information),
-    })
+    fetch(
+      "https://totalitycorp-frontend-challenge-server-side.vercel.app/order",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(information),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

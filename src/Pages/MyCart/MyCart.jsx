@@ -35,13 +35,16 @@ const MyCart = () => {
       image,
     };
 
-    fetch("http://localhost:5000/addproduct", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newProduct),
-    })
+    fetch(
+      "https://totalitycorp-frontend-challenge-server-side.vercel.app/addproduct",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
@@ -59,9 +62,12 @@ const MyCart = () => {
   const handleRemove = (id) => {
     const proceed = confirm("Are You sure you want to delete");
     if (proceed) {
-      fetch(`http://localhost:5000/product/${id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://totalitycorp-frontend-challenge-server-side.vercel.app/product/${id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
@@ -76,9 +82,12 @@ const MyCart = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${user?.email}`, {
-      method: "GET",
-    })
+    fetch(
+      `https://totalitycorp-frontend-challenge-server-side.vercel.app/product/${user?.email}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setproductData(data);

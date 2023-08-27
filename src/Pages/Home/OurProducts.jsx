@@ -34,13 +34,16 @@ const OurProducts = () => {
         image,
       };
 
-      fetch("http://localhost:5000/addproduct", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newProduct),
-      })
+      fetch(
+        "https://totalitycorp-frontend-challenge-server-side.vercel.app/addproduct",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newProduct),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
@@ -60,7 +63,7 @@ const OurProducts = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/products/${sortCategory}/${sortPrice}/${sortRating}`,
+      `https://totalitycorp-frontend-challenge-server-side.vercel.app/products/${sortCategory}/${sortPrice}/${sortRating}`,
       {
         method: "GET",
       }
